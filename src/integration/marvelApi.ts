@@ -3,7 +3,7 @@ import {createMD5Hash} from "../core/crypto";
 
 export default class MarvelApi {
     static async listCharacters() {
-        const axiosResponse =  await axios.get(url(`/characters`));
+        const axiosResponse =  await axios.get(url(`/characters`, { limit: "100"}));
         return axiosResponse.data;
     }
 
