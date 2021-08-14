@@ -1,0 +1,79 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Marvel Characters API",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "character",
+      "description": "Character resources"
+    }
+  ],
+  "paths": {
+    "/characters": {
+      "get": {
+        "summary": "Fetch list of character IDs in Marvel universe.",
+        "tags": ["character"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/characters/{id}": {
+      "get": {
+        "summary": "Get detail of single Marvel character",
+        "tags": ["character"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Character ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Character"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Character": {
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
