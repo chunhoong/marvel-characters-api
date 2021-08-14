@@ -1,9 +1,11 @@
 import axios from "axios";
 import {createMD5Hash} from "../core/crypto";
+import {MARVEL_API_PRIVATE_KEY, MARVEL_API_PUBLIC_KEY, MARVEL_API_URL} from "../core/config";
+import logger from "../core/logger";
 
 export default class MarvelApi {
     static async listCharacters() {
-        const axiosResponse =  await axios.get(url(`/characters`, { limit: "100"}));
+        const axiosResponse = await axios.get(url(`/characters`, {limit: "100"}));
         return axiosResponse.data;
     }
 
@@ -15,11 +17,9 @@ export default class MarvelApi {
 
 const url = (path: string, parameters?: Record<string, string>) => {
     const timestamp = Date.now().toString()
-    const PRIVATE_KEY = process.env["marvel.api.privateKey"];
-    const PUBLIC_KEY = process.env["marvel.api.publicKey"];
-    const hash = createMD5Hash(timestamp + PRIVATE_KEY + PUBLIC_KEY);
-    const baseUrl = process.env["marvel.api.url"] + "/v1/public";
+    const hash = createMD5Hash(timestamp + MARVEL_API_PRIVATE_KEY + MARVEL_API_PUBLIC_KEY);
+    const baseUrl = MARVEL_API_URL + "/v1/public";
     const additionalParameter = parameters ? Object.keys(parameters).map(key => `${key}=${parameters[key]}`).join("&") : "";
-    const urlWithoutAdditionalParameter = baseUrl + path + `?ts=${timestamp}&apikey=${PUBLIC_KEY}&hash=${hash}`;
+    const urlWithoutAdditionalParameter = baseUrl + path + `?ts=${timestamp}&apikey=${MARVEL_API_PUBLIC_KEY}&hash=${hash}`;
     return additionalParameter ? (urlWithoutAdditionalParameter + "&" + additionalParameter) : urlWithoutAdditionalParameter;
 }

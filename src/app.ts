@@ -1,11 +1,8 @@
 import express from "express";
 import logger from "./core/logger";
 import characterRouter from "./character/characterRouter";
-import {config} from "dotenv";
 import swaggerUi from "swagger-ui-express";
 import path from "path";
-
-config();
 
 const app = express();
 

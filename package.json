@@ -4,7 +4,7 @@
   "description": "Marvel characters API",
   "scripts": {
     "test": "jest",
-    "start": "nodemon src/app.ts",
+    "start": "nodemon -r dotenv/config src/app.ts",
     "build": "npm run clean && npm run build:ts && npm run copy:config && npm run copy:public",
     "build:ts": "tsc --project .",
     "clean": "rimraf dist",
