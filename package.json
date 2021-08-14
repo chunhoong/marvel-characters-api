@@ -1,0 +1,29 @@
+{
+  "name": "marvel-characters-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/app.ts",
+    "build": "npm run clean && npm run build:ts && npm run copy:public",
+    "build:ts": "tsc --project .",
+    "clean": "rimraf dist",
+    "copy:public": "cpy --parents --cwd=src \"./public/**\" ../dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pino": "^7.0.0-rc.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.6.1",
+    "cpy-cli": "^3.1.1",
+    "nodemon": "^2.0.12",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.2.0",
+    "typescript": "^4.3.5"
+  }
+}
