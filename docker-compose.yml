@@ -1,0 +1,10 @@
+services:
+  application:
+    container_name: application
+    build: .
+    ports:
+      - 3333:3333
+
+  redis:
+    container_name: redis
+    image: redis:6.2-alpine
