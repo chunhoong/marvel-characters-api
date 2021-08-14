@@ -1,14 +1,13 @@
 {
   "name": "marvel-characters-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Marvel characters API",
   "scripts": {
     "start": "nodemon src/app.ts",
-    "build": "npm run clean && npm run build:ts && npm run copy:public",
+    "build": "npm run clean && npm run build:ts && npm run copy:config",
     "build:ts": "tsc --project .",
     "clean": "rimraf dist",
-    "copy:public": "cpy --parents --cwd=src \"./public/**\" ../dist"
+    "copy:config": "cpy ./.env dist"
   },
   "keywords": [],
   "author": "",
