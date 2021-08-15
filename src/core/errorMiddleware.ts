@@ -4,10 +4,12 @@ import logger from "./logger";
 
 export const errorLogger = (error: Error | unknown, req: Request, res: Response, next: NextFunction) => {
     /**
-     * Split into multiple condition blocks due to type checking of pinoJS.
+     * Split into multiple condition blocks due to peculiar type definition of pinoJS.
      */
-    if (error instanceof Error && !(error instanceof ResourceNotFoundError)) {
-        logger.error(error as Error);
+    if (error instanceof Error) {
+        if (!(error instanceof ResourceNotFoundError)) {
+            logger.error(error as Error);
+        }
     } else if (error instanceof Object) {
         logger.error(error as Object);
     } else if (typeof error === "string") {
@@ -19,7 +21,7 @@ export const errorLogger = (error: Error | unknown, req: Request, res: Response,
     next(error);
 }
 
-export const errorResponder = (error: Error | unknown, req: Request, res: Response) => {
+export const errorResponder = (error: Error | unknown, req: Request, res: Response, next: NextFunction) => {
     if (error instanceof ResourceNotFoundError) {
         res.status(400).send({
             timestamp: Date.now().toString(),
