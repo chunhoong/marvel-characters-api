@@ -1,4 +1,5 @@
 # Marvel Characters API
+Marvel Characters API (MCA), powered by official Marvel Comics API.
 
 ## Prerequisite
 
@@ -8,27 +9,25 @@
 
 ## Getting started
 
-To start working on this project, install the dependencies by executing:
+1. To start working on this project, install the dependencies by executing:
 
-```shell
-npm install
-```
+    ```shell
+    npm install
+    ```
 
-By default, the configuration file is not committed into version control system. Yet you can create yours by making a
-copy from the sample.
+2. MCA can be configured by using `.env` file. However, `.env` is not committed into version control system. Yet you can create yours by making a
+copy from `.env-sample`.
 
-```shell
-cp .env-sample .env
-```
 
-Now you may start your development server with by running:
+3. Now you may start your development server with by running:
 
-```shell
-npm start
-```
+    ```shell
+    npm start
+    ```
 
 ## Generate a production build
 
+MCA is packaged into a Docker image so it can be provisioned as container.
 
 ```shell
 docker build -t mca:latest .
