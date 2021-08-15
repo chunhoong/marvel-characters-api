@@ -3,7 +3,6 @@ import Character from "./character";
 import Cache from "../core/cache";
 import {CacheKeys} from "../constants/cache";
 import {ResourceNotFoundError} from "../core/error";
-import {AxiosError} from "axios";
 
 class CharacterService {
 
@@ -16,7 +15,9 @@ class CharacterService {
 
         const response = await MarvelApi.listCharacters();
         const characterIds: number[] = response.data.data.results.map((result: Record<string, unknown>) => result.id);
-        await Cache.set(CacheKeys.CHARACTER_IDS, characterIds);
+
+        await Cache.set(CacheKeys.CHARACTER_IDS, characterIds, 60 * 60);
+
         return characterIds;
     }
 
