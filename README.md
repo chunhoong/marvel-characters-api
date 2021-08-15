@@ -9,12 +9,12 @@ Marvel Characters API (MCA), powered by official Marvel Comics API.
 
 ## Getting started
 
-1. Provision local redis by using running docker-compose:
+1. Provision local redis using docker-compose:
    ```shell
    docker-compose up -d
    ```
 
-2. Install the project dependencies by executing:
+2. Install the project dependencies:
 
     ```shell
     npm install
@@ -24,7 +24,7 @@ Marvel Characters API (MCA), powered by official Marvel Comics API.
    create yours by making a copy from `.env-sample`.
 
 
-4. Now you may start your development server with by running:
+4. Now you may start your development server by running:
 
     ```shell
     npm start
