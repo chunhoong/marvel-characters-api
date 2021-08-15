@@ -1,16 +1,14 @@
-import axios from "axios";
+import axios, {AxiosPromise, AxiosResponse} from "axios";
 import {createMD5Hash} from "../core/crypto";
 import {MARVEL_API_PRIVATE_KEY, MARVEL_API_PUBLIC_KEY, MARVEL_API_URL} from "../constants/config";
 
 export default class MarvelApi {
-    static async listCharacters() {
-        const axiosResponse = await axios.get(url(`/characters`, {limit: "100"}));
-        return axiosResponse.data;
+    static listCharacters(): AxiosPromise {
+        return axios.get(url(`/characters`, {limit: "100"}));
     }
 
-    static async getCharacter(id: string) {
-        const axiosResponse = await axios.get(url(`/characters/${id}`));
-        return axiosResponse.data;
+    static getCharacter(id: string): AxiosPromise {
+        return axios.get(url(`/characters/${id}`));
     }
 }
 
