@@ -1,5 +1,11 @@
 # Marvel Characters API
 
+## Prerequisite
+
+- NodeJS
+- Docker
+- Redis
+
 ## Getting started
 
 To start working on this project, install the dependencies by executing:
@@ -23,10 +29,10 @@ npm start
 
 ## Generate a production build
 
-To generate a production build, execute:
 
 ```shell
-npm run build
-```
+docker build -t mca:latest .
 
-Now you should be able to find the transpiled files at `dist` folder.
+# To run the server in port 9999
+docker run -d -p 9999:9999 -e "PORT=9999" mca:latest
+```
