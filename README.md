@@ -1,25 +1,30 @@
 # Marvel Characters API
+
 Marvel Characters API (MCA), powered by official Marvel Comics API.
 
 ## Prerequisite
 
 - NodeJS
 - Docker
-- Redis
 
 ## Getting started
 
-1. To start working on this project, install the dependencies by executing:
+1. Provision local redis by using running docker-compose:
+   ```shell
+   docker-compose up -d
+   ```
+
+2. Install the project dependencies by executing:
 
     ```shell
     npm install
     ```
 
-2. MCA can be configured by using `.env` file. However, `.env` is not committed into version control system. Yet you can create yours by making a
-copy from `.env-sample`.
+3. MCA can be configured by using `.env` file. However, `.env` is not committed into version control system. Yet you can
+   create yours by making a copy from `.env-sample`.
 
 
-3. Now you may start your development server with by running:
+4. Now you may start your development server with by running:
 
     ```shell
     npm start

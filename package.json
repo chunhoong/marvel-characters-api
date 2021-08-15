@@ -12,8 +12,8 @@
     "copy:public": "cpy --parents --cwd=src \"./public/**\" ../dist"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Chun Hoong Lim",
+  "license": "UNLICENSED",
   "dependencies": {
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
