@@ -1,5 +1,5 @@
 import {ResourceNotFoundError} from "./error";
-import {NextFunction, Response} from "express";
+import {NextFunction, Request, Response} from "express";
 import logger from "./logger";
 
 export const errorLogger = (error: Error | unknown, req: Request, res: Response, next: NextFunction) => {
@@ -19,7 +19,7 @@ export const errorLogger = (error: Error | unknown, req: Request, res: Response,
     next(error);
 }
 
-export const errorResponder = (error: Error | unknown, req: Request, res: Response, next: NextFunction) => {
+export const errorResponder = (error: Error | unknown, req: Request, res: Response) => {
     if (error instanceof ResourceNotFoundError) {
         res.status(400).send({
             timestamp: Date.now().toString(),

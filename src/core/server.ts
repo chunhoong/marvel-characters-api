@@ -14,8 +14,8 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(undefined, {
     }
 }));
 
-app.use(errorLogger as unknown as ErrorRequestHandler);
-app.use(errorResponder as unknown as ErrorRequestHandler);
+app.use(errorLogger as ErrorRequestHandler);
+app.use(errorResponder as ErrorRequestHandler);
 
 const applicationName = process.env["application.name"] ?? "Application";
 const port = Number(process.env["application.server.port"] ?? 8080);
