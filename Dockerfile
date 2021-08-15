@@ -7,4 +7,4 @@ FROM node:lts-alpine
 WORKDIR /root/marvel-characters-api
 COPY --from=builder /usr/marvel-characters-api/node_modules ./node_modules
 COPY --from=builder /usr/marvel-characters-api/dist ./
-CMD node -r dotenv/config ./app.js
+CMD node -r dotenv/config ./core/server.js

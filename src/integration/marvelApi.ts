@@ -1,7 +1,6 @@
 import axios from "axios";
 import {createMD5Hash} from "../core/crypto";
 import {MARVEL_API_PRIVATE_KEY, MARVEL_API_PUBLIC_KEY, MARVEL_API_URL} from "../constants/config";
-import logger from "../core/logger";
 
 export default class MarvelApi {
     static async listCharacters() {

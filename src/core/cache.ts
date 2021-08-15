@@ -4,9 +4,8 @@ import logger from "./logger";
 
 const redisClient = createClient(Number(REDIS_PORT), REDIS_HOST);
 
-redisClient.on("error", error => {
-    logger.error(error);
-})
+redisClient.on("ready", () => logger.info("Connection to redis is established"));
+redisClient.on("error", error => logger.error(error))
 
 export default class Cache {
 

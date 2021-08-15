@@ -3,7 +3,7 @@ services:
     container_name: application
     build: .
     ports:
-      - 3333:3333
+      - 8080:8080
 
   redis:
     container_name: redis
