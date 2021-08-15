@@ -17,7 +17,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(undefined, {
 app.use(errorLogger as ErrorRequestHandler);
 app.use(errorResponder as ErrorRequestHandler);
 
-const applicationName = process.env["application.name"] ?? "Application";
-const port = Number(process.env["application.server.port"] ?? 8080);
+const applicationName = process.env.APPLICATION_NAME ?? "Application";
+const port = Number(process.env.APPLICATION_SERVER_PORT ?? 8080);
 
 app.listen(port, () => logger.info(`${applicationName} is up and running on port ${port}`));
