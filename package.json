@@ -6,7 +6,7 @@
     "test": "jest",
     "start": "nodemon -r dotenv/config src/core/server.ts",
     "build": "npm run clean && npm run build:ts && npm run copy:config && npm run copy:public",
-    "build:ts": "tsc --project .",
+    "build:ts": "tsc --project tsconfig.prod.json",
     "clean": "rimraf dist",
     "copy:config": "cpy ./.env dist",
     "copy:public": "cpy --parents --cwd=src \"./public/**\" ../dist"
