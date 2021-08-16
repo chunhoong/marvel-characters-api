@@ -6,8 +6,14 @@ jest.mock("../integration/marvelApi");
 describe("character service", () => {
 
     beforeAll(() => {
-        MarvelApi.listCharacters = jest.fn().mockResolvedValue(require("../__tests__/mock/listCharacters.json"));
-        MarvelApi.getCharacter = jest.fn().mockResolvedValue(require("../__tests__/mock/getCharacter.json"));
+        MarvelApi.listCharacters = jest.fn().mockResolvedValue({
+            status: 200,
+            data: require("../__tests__/jsons/listCharacters.json")
+        });
+        MarvelApi.getCharacter = jest.fn().mockResolvedValue({
+            status: 200,
+            data: require("../__tests__/jsons/getCharacter.json")
+        });
     });
 
     it("should list character IDs correctly", async () => {

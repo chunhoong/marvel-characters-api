@@ -2,9 +2,13 @@ import {errorLogger, errorResponder} from "./errorMiddleware";
 import {ResourceNotFoundError} from "./error";
 import logger from "./logger";
 import {Request, Response} from "express";
-import {mockResponse} from "../__tests__/utilities/handlerUtil";
 
 jest.mock("./logger");
+
+ const mockResponse: Response = {
+    status: jest.fn().mockReturnThis(),
+    send: jest.fn().mockReturnThis()
+} as unknown as Response;
 
 describe("errorMiddleware", () => {
 

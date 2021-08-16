@@ -2,7 +2,6 @@ import app from "../app";
 import express, {ErrorRequestHandler} from "express";
 import path from "path";
 import swaggerUi from "swagger-ui-express";
-import logger from "./logger";
 import {errorLogger, errorResponder} from "./errorMiddleware";
 
 app.use(express.json());
@@ -17,7 +16,4 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(undefined, {
 app.use(errorLogger as ErrorRequestHandler);
 app.use(errorResponder as ErrorRequestHandler);
 
-const applicationName = process.env.APPLICATION_NAME ?? "Application";
-const port = Number(process.env.PORT ?? 8080);
-
-app.listen(port, () => logger.info(`${applicationName} is up and running on port ${port}`));
+export {app};
