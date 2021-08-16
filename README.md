@@ -6,10 +6,12 @@ Marvel Characters API (MCA), powered by official Marvel Comics API.
 
 - NodeJS
 - Docker
+- Marvel Comics API developer account
 
 ## Getting started
 
 1. Provision local redis using docker-compose:
+   
    ```shell
    docker-compose up -d
    ```
@@ -21,7 +23,7 @@ Marvel Characters API (MCA), powered by official Marvel Comics API.
     ```
 
 3. MCA can be configured by using `.env` file. However, `.env` is not committed into version control system. Yet you can
-   create yours by making a copy from `.env-sample`.
+   create yours by using `.env-sample` as reference.
 
 
 4. Now you may start your development server by running:
@@ -32,11 +34,8 @@ Marvel Characters API (MCA), powered by official Marvel Comics API.
 
 ## Generate a production build
 
-MCA is packaged into a Docker image so it can be provisioned as container.
+MCA is packaged into a Docker image for production:
 
 ```shell
 docker build -t mca:latest .
-
-# To run the server in port 9999
-docker run -d -p 9999:9999 -e "PORT=9999" mca:latest
 ```

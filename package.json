@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest",
     "jest": "jest --watch",
-    "start": "nodemon -r dotenv/config src/core/index.ts",
+    "start": "nodemon -r dotenv/config src/core/server.ts",
     "build": "npm run clean && npm run build:ts && npm run copy:config && npm run copy:public",
     "build:ts": "tsc --project tsconfig.prod.json",
     "clean": "rimraf dist",

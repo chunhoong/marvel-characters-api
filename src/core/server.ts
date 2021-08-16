@@ -1,19 +1,6 @@
+import logger from "./logger";
 import app from "../app";
-import express, {ErrorRequestHandler} from "express";
-import path from "path";
-import swaggerUi from "swagger-ui-express";
-import {errorLogger, errorResponder} from "./errorMiddleware";
 
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(undefined, {
-    swaggerOptions: {
-        url: "/docs/openapi.json"
-    }
-}));
+const port = Number(process.env.PORT ?? 8080);
 
-app.use(errorLogger as ErrorRequestHandler);
-app.use(errorResponder as ErrorRequestHandler);
-
-export {app};
+app.listen(port, () => logger.info(`Marvel Character API is up and running on port ${port}`));
