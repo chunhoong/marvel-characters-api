@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Marvel characters API",
   "scripts": {
-    "test": "jest",
-    "jest": "jest --watch",
+    "test": "jest --testPathPattern=/src",
+    "test:watch": "jest --watch --testPathPattern=/src",
+    "test:integration": "jest --testPathPattern=/integration",
     "start": "nodemon -r dotenv/config src/core/server.ts",
     "build": "npm run clean && npm run build:ts && npm run copy:config && npm run copy:public",
     "build:ts": "tsc --project tsconfig.prod.json",

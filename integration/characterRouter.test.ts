@@ -1,4 +1,4 @@
-import {app} from "../src/core/server";
+import app from "../src/app";
 import request from "supertest";
 
 describe("Character api test", () => {
@@ -15,7 +15,7 @@ describe("Character api test", () => {
                     done();
                 })
                 .catch(done);
-        });
+        }, 10000);
 
     });
 
