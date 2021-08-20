@@ -1,7 +1,11 @@
 import app from "../src/app";
 import request from "supertest";
+import cache from "../src/core/cache";
 
 describe("Character api test", () => {
+
+    beforeEach(cache.connect);
+    afterEach(cache.disconnect);
 
     describe("GET /characters", () => {
 
