@@ -1,7 +1,7 @@
 FROM node:lts-alpine AS builder
 WORKDIR /usr/marvel-characters-api
 COPY . /usr/marvel-characters-api
-RUN npm install && npm run build && npm ci --production
+RUN npm install && npm run build && npm ci --production --ignore-scripts
 
 FROM node:lts-alpine
 WORKDIR /root/marvel-characters-api
