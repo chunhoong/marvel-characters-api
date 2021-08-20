@@ -1,6 +1,6 @@
 import MarvelApi from "../integration/marvelApi";
 import characterService from "./characterService";
-import Cache from "../core/cache";
+import cache from "../core/cache";
 import {mocked} from "ts-jest/utils";
 import {AxiosResponse} from "axios";
 
@@ -9,11 +9,11 @@ jest.mock("../core/cache");
 
 describe("character service", () => {
 
-    const MockedCache = mocked(Cache, true);
+    const mockedCache = mocked(cache, true);
     const MockedMarvelApi = mocked(MarvelApi, true);
 
     beforeAll(() => {
-        MockedCache.set.mockResolvedValue();
+        mockedCache.set.mockResolvedValue();
 
         MockedMarvelApi.listCharacters.mockResolvedValue({
             status: 200,
@@ -27,14 +27,14 @@ describe("character service", () => {
     });
 
     beforeEach(() => {
-        MockedCache.set.mockClear();
-        MockedCache.getAs.mockReset();
+        mockedCache.set.mockClear();
+        mockedCache.getAs.mockReset();
         MockedMarvelApi.listCharacters.mockClear();
         MockedMarvelApi.getCharacter.mockClear();
     });
 
     it("should list character IDs correctly", async () => {
-        MockedCache.getAs.mockResolvedValue(null);
+        mockedCache.getAs.mockResolvedValue(null);
 
         const actual = await characterService.listCharacterIds();
         const expected = [1011334, 1017100, 1009144, 1010699, 1009146, 1016823, 1009148, 1009149, 1010903, 1011266, 1010354, 1010846, 1012717, 1011297, 1011031, 1009150, 1011198, 1011175, 1011136, 1011176];
@@ -46,7 +46,7 @@ describe("character service", () => {
     it("should return character IDs from cache when cache is present", async () => {
         const expected = [1011334, 1017100, 1009144, 1010699, 1009146, 1016823, 1009148, 1009149, 1010903, 1011266, 1010354, 1010846, 1012717, 1011297, 1011031, 1009150, 1011198, 1011175, 1011136, 1011176];
 
-        MockedCache.getAs.mockResolvedValue(expected);
+        mockedCache.getAs.mockResolvedValue(expected);
 
         const actual = await characterService.listCharacterIds();
 

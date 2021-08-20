@@ -1,13 +1,16 @@
-import {createClient} from "redis";
+import {createClient, RedisClient} from "redis";
 import {REDIS_HOST, REDIS_PORT} from "../constants/config";
 import logger from "./logger";
 
-const redisClient = createClient(Number(REDIS_PORT), REDIS_HOST);
+class Cache {
 
-redisClient.on("ready", () => logger.info("Connection to redis is established"));
-redisClient.on("error", error => logger.error(error));
+    private redisClient: RedisClient;
 
-export default class Cache {
+    constructor() {
+        this.redisClient = createClient(Number(REDIS_PORT), REDIS_HOST);
+        this.redisClient.on("ready", () => logger.info("Connection to redis is established"));
+        this.redisClient.on("error", error => logger.error(error));
+    }
 
     /**
      * Set a value to key, with optional TTL (time-to-live)
@@ -15,7 +18,7 @@ export default class Cache {
      * @param value
      * @param ttl time-to-live in seconds
      */
-    static set(key: string, value: unknown, ttl?: number): Promise<void> {
+     set(key: string, value: unknown, ttl?: number): Promise<void> {
         if (typeof value != "string") {
             value = JSON.stringify(value);
         }
@@ -29,9 +32,9 @@ export default class Cache {
             };
 
             if (ttl) {
-                redisClient.set(key, value as string, "EX", ttl, cb);
+                this.redisClient.set(key, value as string, "EX", ttl, cb);
             } else {
-                redisClient.set(key, value as string, cb);
+                this.redisClient.set(key, value as string, cb);
             }
         });
     }
@@ -41,8 +44,8 @@ export default class Cache {
      * <p>This method ONLY apply to non-primitive type. To get primitive value from cache, use {@link get} to read as string.</p>
      * @param key
      */
-    static async getAs<T>(key: string): Promise<T | null> {
-        const value = await Cache.get(key);
+     async getAs<T>(key: string): Promise<T | null> {
+        const value = await this.get(key);
         return value ? JSON.parse(value) : null;
     }
 
@@ -51,9 +54,9 @@ export default class Cache {
      * <p>To get the value from cache as object, use {@link getAs} instead.</p>
      * @param key
      */
-    static get(key: string): Promise<string | null> {
+     get(key: string): Promise<string | null> {
         return new Promise((resolve, reject) => {
-            redisClient.get(key, (error, reply) => {
+            this.redisClient.get(key, (error, reply) => {
                 if (error) {
                     reject(error);
                 } else {
@@ -64,3 +67,5 @@ export default class Cache {
     }
 
 }
+
+export default new Cache();

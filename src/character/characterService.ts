@@ -1,13 +1,13 @@
 import MarvelApi from "../integration/marvelApi";
 import Character from "./character";
-import Cache from "../core/cache";
+import cache from "../core/cache";
 import {CacheKeys} from "../constants/cache";
 import {ResourceNotFoundError} from "../core/error";
 
 class CharacterService {
 
     async listCharacterIds(): Promise<number[]> {
-        const cachedCharacterIds = await Cache.getAs<number[]>(CacheKeys.CHARACTER_IDS);
+        const cachedCharacterIds = await cache.getAs<number[]>(CacheKeys.CHARACTER_IDS);
 
         if (cachedCharacterIds) {
             return cachedCharacterIds;
@@ -16,7 +16,7 @@ class CharacterService {
         const response = await MarvelApi.listCharacters();
         const characterIds: number[] = response.data.data.results.map((result: Record<string, unknown>) => result.id);
 
-        await Cache.set(CacheKeys.CHARACTER_IDS, characterIds, 60 * 60);
+        await cache.set(CacheKeys.CHARACTER_IDS, characterIds, 60 * 60);
 
         return characterIds;
     }
