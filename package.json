@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "jest --testPathPattern=/src",
+    "test:coverage": "jest  --coverage --testPathPattern=/src",
     "test:watch": "jest --watch --testPathPattern=/src",
     "test:integration": "jest --testPathPattern=/integration",
     "start": "nodemon -r dotenv/config src/core/server.ts",
