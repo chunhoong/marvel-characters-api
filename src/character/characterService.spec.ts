@@ -3,6 +3,7 @@ import characterService from "./characterService";
 import cache from "../core/cache";
 import {mocked} from "ts-jest/utils";
 import {AxiosResponse} from "axios";
+import {ResourceNotFoundError} from "../core/error";
 
 jest.mock("../integration/marvelApi");
 jest.mock("../core/cache");
@@ -62,6 +63,36 @@ describe("character service", () => {
             "description": ""
         };
         expect(actual).toMatchObject(expected);
+    });
+
+    it("should throw ResourceNotFoundError when Marvel Comic API returns status 404", async () => {
+        MockedMarvelApi.getCharacter.mockRejectedValue({
+            response: {
+                status: 404
+            }
+        });
+
+        try {
+            await characterService.getCharacter("non-existing-character-id");
+            fail("ResourceNotFoundError is expected")
+        } catch (error) {
+            expect(error instanceof ResourceNotFoundError).toBeTruthy();
+        }
+    });
+
+    it("should throw error when Marvel Comic API returns non 200 and non 404 status", async () => {
+        MockedMarvelApi.getCharacter.mockRejectedValue({
+            response: {
+                status: 500
+            }
+        });
+
+        try {
+            await characterService.getCharacter("non-existing-character-id");
+            fail("ResourceNotFoundError is expected");
+        } catch (error) {
+            expect(error.response.status).toBe(500);
+        }
     });
 
 });
